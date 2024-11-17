@@ -1,1 +1,157 @@
-<p>event-form works!</p>
+<div class="form-container">
+  <div class="wrapper">
+    <div class="wrapper-left">
+      <form class="event-form">
+        <!-- Conditional rendering based on selected event type -->
+        <div *ngIf="eventData.eventType === 'deviceMalfunction'">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Device ID</mat-label>
+            <input
+              matInput
+              placeholder="Enter Device ID"
+              name="deviceId"
+              [(ngModel)]="eventData.deviceId"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Event Date (Timestamp)</mat-label>
+            <input
+              matInput
+              type="number"
+              placeholder="Enter Event Date"
+              name="eventDate"
+              [(ngModel)]="eventData.eventDate"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Reason Code</mat-label>
+            <input
+              matInput
+              type="number"
+              placeholder="Enter Reason Code"
+              name="reasonCode"
+              [(ngModel)]="eventData.reasonCode"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Reason Text</mat-label>
+            <input
+              matInput
+              placeholder="Enter Reason Text"
+              name="reasonText"
+              [(ngModel)]="eventData.reasonText"
+            />
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="eventData.eventType === 'temperatureExceeded'">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Device ID</mat-label>
+            <input
+              matInput
+              placeholder="Enter Device ID"
+              name="deviceId"
+              [(ngModel)]="eventData.deviceId"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Event Date (Timestamp)</mat-label>
+            <input
+              matInput
+              type="number"
+              placeholder="Enter Event Date"
+              name="eventDate"
+              [(ngModel)]="eventData.eventDate"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Temperature</mat-label>
+            <input
+              matInput
+              type="number"
+              placeholder="Enter Temperature"
+              name="temp"
+              [(ngModel)]="eventData.temp"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Threshold</mat-label>
+            <input
+              matInput
+              type="number"
+              placeholder="Enter Threshold"
+              name="treshold"
+              [(ngModel)]="eventData.treshold"
+            />
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="eventData.eventType === 'doorUnlocked'">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Device ID</mat-label>
+            <input
+              matInput
+              placeholder="Enter Device ID"
+              name="deviceId"
+              [(ngModel)]="eventData.deviceId"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Event Date (Timestamp)</mat-label>
+            <input
+              matInput
+              type="number"
+              placeholder="Enter Event Date"
+              name="eventDate"
+              [(ngModel)]="eventData.eventDate"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Unlock Date (Timestamp)</mat-label>
+            <input
+              matInput
+              type="number"
+              placeholder="Enter Unlock Date"
+              name="unlockDate"
+              [(ngModel)]="eventData.unlockDate"
+            />
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+
+    <div class="wrapper-right">
+      <div class="data-generate">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Select Event Type</mat-label>
+          <mat-select
+            [(value)]="selectedEventType"
+            (selectionChange)="onEventTypeChange()"
+          >
+            <mat-option value="deviceMalfunction"
+              >Device Malfunction</mat-option
+            >
+            <mat-option value="temperatureExceeded"
+              >Temperature Exceeded</mat-option
+            >
+            <mat-option value="doorUnlocked">Door Unlocked</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="actions">
+          <button mat-raised-button color="primary" (click)="generateData()">
+            Generate Data
+          </button>
+
+          <button mat-raised-button color="primary" (click)="submitData()">
+            Submit Data
+          </button>
+        </div>
+      </div>
+      <div class="output-container">
+        <h3>Data to be sent to server:</h3>
+        <pre>{{ eventData | json }}</pre>
+      </div>
+    </div>
+  </div>
+</div>
