@@ -15,6 +15,7 @@ import {
   TemperatureExceededEvent,
 } from '../models/event.models';
 import { DataGeneratorService } from '../services/data-generator.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-event-form',
@@ -49,7 +50,10 @@ export class EventFormComponent {
     | 'temperatureExceeded'
     | 'doorUnlocked' = 'deviceMalfunction';
 
-  constructor(private dataGeneratorService: DataGeneratorService) {}
+  constructor(
+    private dataGeneratorService: DataGeneratorService,
+    private apiService: ApiService
+  ) {}
 
   generateData() {
     this.eventData = this.dataGeneratorService.generateData(
@@ -59,6 +63,14 @@ export class EventFormComponent {
 
   submitData() {
     console.log('Sending data to server:', this.eventData);
+    this.apiService.sendEventData(this.eventData).subscribe(
+      (response) => {
+        console.log('Data successfully sent to server:', response);
+      },
+      (error) => {
+        console.error('Error sending data to server:', error);
+      }
+    );
   }
 
   onEventTypeChange() {
