@@ -1,26 +1,34 @@
-.form-container {
-  padding-top: 15vh;
+.container {
+  padding: 3vh 3vw 3vh 3vw;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: start;
-  height: 100vh;
-  max-width: 650px;
+  max-width: 800px;
 }
 
-.wrapper {
+.title {
+  text-align: center;
+  font-weight: bold;
+}
+
+.description {
+  font-size: 16px;
+  margin-bottom: 5vh;
+}
+
+.form-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   max-width: 800px;
+  gap: 16px;
 }
 
-.wrapper-left {
+.form-container__left-wrapper,
+.form-container__right-wrapper {
   width: 300px;
-}
-
-.wrapper-right {
-  width: 300px;
+  flex: 1 1 300px;
 }
 
 .full-width {
@@ -37,23 +45,74 @@
   justify-content: end;
 }
 
-.actions {
+.data-generate__actions {
   display: flex;
-  justify-content: space-between;
-}
-
-.output-container {
-  background: #f5f5f5;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  overflow-wrap: break-word; // Dodane
-  word-wrap: break-word; // Dodane dla kompatybilności z IE
-  word-break: break-word; // Dodane
+  justify-content: space-evenly;
+  margin-bottom: 25px;
 }
 
 pre {
   margin: 0;
   font-size: 14px;
-  white-space: pre-wrap; // Przenoszenie długich linii
+  white-space: pre-wrap; /* Przenoszenie długich linii */
+}
+
+.response-container,
+.error-container {
+  padding: 10px;
+  padding-bottom: 0px;
+  border-radius: 4px;
+}
+
+.response-container {
+  background: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  margin-bottom: 5vh;
+}
+
+.response-container__button {
+  display: flex;
+  justify-content: end;
+}
+
+.error-container {
+  background: #ffebee;
+  border: 1px solid #ef9a9a;
+  margin-bottom: 5vh;
+}
+
+.error-container__button {
+  display: flex;
+  justify-content: end;
+}
+
+button {
+  width: 100%; /* Gwarantuje pełną szerokość dla dzieci */
+  box-sizing: border-box; /* Uwzględnia padding i border w szerokości */
+  margin-bottom: 15px;
+}
+
+textarea {
+  font-family: monospace; /* Monospace do edytowania kodu */
+  white-space: pre; /* Zachowanie formatowania JSON */
+  resize: vertical; /* Pozwala zmieniać rozmiar pionowo */
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.form-container__request-text-area {
+  margin-bottom: 0px;
+}
+
+/* Media query for screens smaller than 650px */
+@media (max-width: 550px) {
+  .form-container {
+    flex-direction: column; /* Switch to column layout */
+    gap: 16px; /* Add some spacing between rows */
+  }
+
+  .form-container__left-wrapper,
+  .form-container__right-wrapper {
+    width: 100%; /* Full width for each container */
+  }
 }

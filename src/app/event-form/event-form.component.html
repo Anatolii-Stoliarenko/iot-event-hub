@@ -1,28 +1,65 @@
-<div class="form-container">
-  <div class="wrapper">
-    <div class="wrapper-left">
+<div class="container">
+  <!-- Nagłówek -->
+
+  <p class="description">
+    Flexible Request Editor for IoT and more. Use this tool to edit the payload,
+    set a custom server URL, and test different request configurations.
+  </p>
+
+  <div class="form-container">
+    <!-- Lewa sekcja formularza -->
+    <div class="form-container__left-wrapper">
+      <button mat-raised-button color="primary" (click)="generateData()">
+        Generate Data
+      </button>
+      <!-- Select Event Type -->
+      <p>Select an event type</p>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Select Event Type</mat-label>
+        <mat-select
+          [(value)]="selectedEventType"
+          (selectionChange)="onEventTypeChange()"
+        >
+          <mat-option value="deviceMalfunction">Device Malfunction</mat-option>
+          <mat-option value="temperatureExceeded"
+            >Temperature Exceeded</mat-option
+          >
+          <mat-option value="doorUnlocked">Door Unlocked</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <h2>Event Details</h2>
+      <p>Fill out the details of the IoT event below:</p>
+
       <form class="event-form">
-        <!-- Conditional rendering based on selected event type -->
+        <!-- Device ID -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Device ID</mat-label>
+          <input
+            matInput
+            placeholder="Enter Device ID"
+            name="deviceId"
+            [(ngModel)]="eventData.deviceId"
+            (ngModelChange)="updateEventDataText()"
+          />
+        </mat-form-field>
+
+        <!-- Event Date -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Event Date (Timestamp)</mat-label>
+          <input
+            matInput
+            type="number"
+            placeholder="Enter Event Date"
+            name="eventDate"
+            [(ngModel)]="eventData.eventDate"
+            (ngModelChange)="updateEventDataText()"
+          />
+        </mat-form-field>
+
+        <!-- Dynamic fields based on event type -->
         <div *ngIf="eventData.eventType === 'deviceMalfunction'">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Device ID</mat-label>
-            <input
-              matInput
-              placeholder="Enter Device ID"
-              name="deviceId"
-              [(ngModel)]="eventData.deviceId"
-            />
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Event Date (Timestamp)</mat-label>
-            <input
-              matInput
-              type="number"
-              placeholder="Enter Event Date"
-              name="eventDate"
-              [(ngModel)]="eventData.eventDate"
-            />
-          </mat-form-field>
+          <h3>Device Malfunction Details</h3>
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Reason Code</mat-label>
             <input
@@ -31,8 +68,10 @@
               placeholder="Enter Reason Code"
               name="reasonCode"
               [(ngModel)]="eventData.reasonCode"
+              (ngModelChange)="updateEventDataText()"
             />
           </mat-form-field>
+
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Reason Text</mat-label>
             <input
@@ -40,30 +79,13 @@
               placeholder="Enter Reason Text"
               name="reasonText"
               [(ngModel)]="eventData.reasonText"
+              (ngModelChange)="updateEventDataText()"
             />
           </mat-form-field>
         </div>
 
         <div *ngIf="eventData.eventType === 'temperatureExceeded'">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Device ID</mat-label>
-            <input
-              matInput
-              placeholder="Enter Device ID"
-              name="deviceId"
-              [(ngModel)]="eventData.deviceId"
-            />
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Event Date (Timestamp)</mat-label>
-            <input
-              matInput
-              type="number"
-              placeholder="Enter Event Date"
-              name="eventDate"
-              [(ngModel)]="eventData.eventDate"
-            />
-          </mat-form-field>
+          <h3>Temperature Exceeded Details</h3>
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Temperature</mat-label>
             <input
@@ -72,8 +94,10 @@
               placeholder="Enter Temperature"
               name="temp"
               [(ngModel)]="eventData.temp"
+              (ngModelChange)="updateEventDataText()"
             />
           </mat-form-field>
+
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Threshold</mat-label>
             <input
@@ -82,30 +106,13 @@
               placeholder="Enter Threshold"
               name="treshold"
               [(ngModel)]="eventData.treshold"
+              (ngModelChange)="updateEventDataText()"
             />
           </mat-form-field>
         </div>
 
         <div *ngIf="eventData.eventType === 'doorUnlocked'">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Device ID</mat-label>
-            <input
-              matInput
-              placeholder="Enter Device ID"
-              name="deviceId"
-              [(ngModel)]="eventData.deviceId"
-            />
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Event Date (Timestamp)</mat-label>
-            <input
-              matInput
-              type="number"
-              placeholder="Enter Event Date"
-              name="eventDate"
-              [(ngModel)]="eventData.eventDate"
-            />
-          </mat-form-field>
+          <h3>Door Unlocked Details</h3>
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Unlock Date (Timestamp)</mat-label>
             <input
@@ -114,43 +121,77 @@
               placeholder="Enter Unlock Date"
               name="unlockDate"
               [(ngModel)]="eventData.unlockDate"
+              (ngModelChange)="updateEventDataText()"
             />
           </mat-form-field>
         </div>
       </form>
     </div>
 
-    <div class="wrapper-right">
-      <div class="data-generate">
+    <!-- Prawa sekcja: Wybór i akcje -->
+    <div class="form-container__right-wrapper">
+      <button mat-raised-button color="primary" (click)="submitData()">
+        Submit Data
+      </button>
+      <p>Data to be sent to server:</p>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>API URL</mat-label>
+        <input
+          matInput
+          [(ngModel)]="apiBaseUrl"
+          placeholder="Enter API URL"
+          (ngModelChange)="updateApiBaseUrl()"
+        />
+      </mat-form-field>
+
+      <!-- textarea -->
+      <div class="form-container__request-text-area">
+        <h2>Request:</h2>
+        <p>Use the field below to review or adjust the request payload.</p>
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Select Event Type</mat-label>
-          <mat-select
-            [(value)]="selectedEventType"
-            (selectionChange)="onEventTypeChange()"
-          >
-            <mat-option value="deviceMalfunction"
-              >Device Malfunction</mat-option
-            >
-            <mat-option value="temperatureExceeded"
-              >Temperature Exceeded</mat-option
-            >
-            <mat-option value="doorUnlocked">Door Unlocked</mat-option>
-          </mat-select>
+          <textarea
+            matInput
+            placeholder="Edit JSON data"
+            [(ngModel)]="eventDataText"
+            (ngModelChange)="updateEventData()"
+            rows="7"
+          ></textarea>
         </mat-form-field>
+      </div>
 
-        <div class="actions">
-          <button mat-raised-button color="primary" (click)="generateData()">
-            Generate Data
-          </button>
+      <!-- Response Section -->
+      <div class="response-container" *ngIf="serverResponse">
+        <h2>Response</h2>
+        <h3>Success!</h3>
+        <p>Message: {{ serverResponse.message }}</p>
+        <div>
+          <p>Details:</p>
+          <p>Status: {{ serverResponse.details.status }}</p>
+          <p>{{ serverResponse.details.message }}</p>
+        </div>
 
-          <button mat-raised-button color="primary" (click)="submitData()">
-            Submit Data
+        <div class="response-container__button">
+          <button mat-raised-button color="success" (click)="clearResponse()">
+            Clear Response
           </button>
         </div>
       </div>
-      <div class="output-container">
-        <h3>Data to be sent to server:</h3>
-        <pre>{{ eventData | json }}</pre>
+
+      <!-- Error Section -->
+      <div class="error-container" *ngIf="errorMessage">
+        <h2>Errors</h2>
+        <p>{{ errorMessage }}</p>
+        <ul *ngIf="validationErrors.length > 0">
+          <li *ngFor="let error of validationErrors">
+            {{ error }}
+          </li>
+        </ul>
+
+        <div class="error-container__button">
+          <button mat-raised-button color="warn" (click)="clearError()">
+            Clear Error
+          </button>
+        </div>
       </div>
     </div>
   </div>

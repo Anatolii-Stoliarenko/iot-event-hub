@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Event } from '../models/event.models';
+import { EventType } from '../models/event.models';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,7 @@ import { Event } from '../models/event.models';
 export class DataGeneratorService {
   generateData(
     eventType: 'deviceMalfunction' | 'temperatureExceeded' | 'doorUnlocked'
-  ): Event {
+  ): EventType {
     switch (eventType) {
       case 'deviceMalfunction':
         return {
@@ -23,8 +23,8 @@ export class DataGeneratorService {
           eventType: 'temperatureExceeded',
           deviceId: this.generateRandomString(8),
           eventDate: this.generateTimestamp(),
-          temp: this.generateRandomNumber(20, 100),
-          treshold: this.generateRandomNumber(15, 50),
+          temp: this.generateRandomNumber(20, 100).toString(),
+          treshold: this.generateRandomNumber(15, 50).toString(),
         };
       case 'doorUnlocked':
         return {

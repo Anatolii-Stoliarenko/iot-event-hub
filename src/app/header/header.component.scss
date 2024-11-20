@@ -1,0 +1,65 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+}
+
+.header__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1vh 5vw;
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+}
+
+.github-icon {
+  height: 15px; /* Wysokość obrazka */
+  width: auto; /* Zachowanie proporcji */
+  display: inline-block; /* Zapewnienie odpowiedniego zachowania w linkach */
+  vertical-align: middle; /* Wyrównanie w pionie */
+}
+
+.header__link-icon {
+  display: flex; /* Ustawienie elastycznego kontenera */
+  align-items: center; /* Wyrównanie w pionie */
+  gap: 5px;
+  height: auto; /* Automatyczna wysokość, jeśli 15px nie działa */
+}
+
+.header__logo-img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.header__title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.header__nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+}
+
+.header__nav a {
+  text-decoration: none;
+  color: #020202;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.header__nav a:hover {
+  text-decoration: underline;
+}
