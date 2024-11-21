@@ -2,7 +2,7 @@
 
 [**See the application in action here**](https://iot-event-hub.vercel.app/)
 
-**Polska wersja**: Zobacz [README.md](README.md)
+**Polska wersja**: Zobacz [README.md](README.pl.md)
 
 ## Project Description
 
