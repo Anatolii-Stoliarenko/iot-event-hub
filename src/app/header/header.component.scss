@@ -1,11 +1,14 @@
+$primary: #199fca;
+$secondary: #ba6197;
+
 .container {
   max-width: 800px;
   margin: 0 auto;
 }
 
 .header {
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #ddd;
+  padding: 5px;
+  background-image: linear-gradient(90deg, $primary, $secondary);
 }
 
 .header__content {
@@ -21,7 +24,7 @@
 }
 
 .github-icon {
-  height: 15px; /* Wysokość obrazka */
+  height: 18px;
   width: auto; /* Zachowanie proporcji */
   display: inline-block; /* Zapewnienie odpowiedniego zachowania w linkach */
   vertical-align: middle; /* Wyrównanie w pionie */
@@ -32,6 +35,7 @@
   align-items: center; /* Wyrównanie w pionie */
   gap: 5px;
   height: auto; /* Automatyczna wysokość, jeśli 15px nie działa */
+  color: white;
 }
 
 .header__logo-img {
@@ -42,7 +46,7 @@
 .header__title {
   font-size: 18px;
   font-weight: bold;
-  color: #000000;
+  color: #ffffff;
 }
 
 .header__nav ul {
@@ -55,7 +59,7 @@
 
 .header__nav a {
   text-decoration: none;
-  color: #020202;
+  color: #ffffff;
   font-size: 14px;
   font-weight: bold;
 }

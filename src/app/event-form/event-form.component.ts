@@ -164,12 +164,7 @@ export class EventFormComponent {
         } as DoorUnlockedEvent;
         break;
     }
-    // Synchronizujemy dane z textarea
     this.updateEventDataText();
-  }
-  clearTextarea() {
-    // Czyści tylko zawartość textarea
-    this.eventDataText = '';
   }
 
   clearError() {
